@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>關於 · Shaun Sun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="mark" href="./">VALKYRIE LAB<span>個人紀錄</span></a>
+    <nav aria-label="頁面導覽">
+      <a href="./">首頁</a>
+      <a href="hrist.html">Hrist</a>
+      <a href="geiravor.html">Geiravör</a>
+      <a href="work.html">作品</a>
+      <a href="about.html" aria-current="page">關於</a>
+    </nav>
+  </header>
+
+  <div class="page-head">
+    <h1 class="tc"><span class="ep">第肆節</span><span class="k"><span class="big">關於</span><span>我</span></span><span class="en">Personnel file</span></h1>
+    <div class="about">
+      <div>
+        <p>國立中央大學機械工程學系大二，BoltNut 機器人社團美宣部儲備幹部。Valkyrie Lab 是我自己做飛行器的工作室名字，Hrist、Geiravör 都是女武神的名字。</p>
+        <p>家裡三台電腦用 Tailscale 連在一起，各做各的。機體零件大多是自己 3D 列印的。</p>
+      </div>
+      <div class="side">
+        <aside class="nodes fr" aria-label="三台電腦的分工">
+          <div class="panel-h"><span>運算節點</span><span>3 nodes</span></div>
+          <div class="node"><span class="hx">N</span><div><b>NOTEBOOK</b><span>筆電：畫 CAD、接硬體</span></div></div>
+          <div class="node"><span class="hx">I</span><div><b>INORI-5060</b><span>桌機：XFOIL、飛行模擬</span></div></div>
+          <div class="node"><span class="hx">L</span><div><b>LENA-5070</b><span>Ubuntu：CFD、本機 AI</span></div></div>
+        </aside>
+        <dl class="contact fr">
+          <dt>Instagram</dt><dd><a href="https://www.instagram.com/depictlife._.forever/" target="_blank" rel="noopener">@depictlife._.forever</a></dd>
+          <dt>Email</dt><dd><a href="mailto:shaun95.sun@gmail.com">shaun95.sun@gmail.com</a></dd>
+          <dt>GitHub</dt><dd><a href="https://github.com/shaun95sun-lang" target="_blank" rel="noopener">shaun95sun-lang</a></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <section id="tools" aria-labelledby="tools-h">
+    <h2 class="tc" id="tools-h"><span class="ep">第伍節</span><span class="k"><span class="big">工具</span><span>對照</span></span><span class="en">Toolchain cross-reference</span></h2>
+    <p class="sec-note">點專案名稱可以跳過去看。</p>
+    <dl class="xref">
+      <dt>SOLIDWORKS</dt><dd><a href="hrist.html">Hrist</a><a href="geiravor.html">Geiravör</a><a href="work.html#testbed">1.2 m 測試機</a><a href="work.html#omni">全向輪底盤</a><a href="work.html#cycloid">減速機與 swerve</a></dd>
+      <dt>XFOIL · XFLR5</dt><dd><a href="hrist.html">Hrist 翼型研究</a></dd>
+      <dt>OpenFOAM</dt><dd><a href="hrist.html#cfd">Hrist CFD</a></dd>
+      <dt>JSBSim · FlightGear</dt><dd><a href="hrist.html">Hrist 飛行模擬</a></dd>
+      <dt>ArduPilot</dt><dd><a href="geiravor.html">Geiravör</a></dd>
+      <dt>ESP32 · PlatformIO</dt><dd><a href="work.html#fusion">感測器融合平台</a><a href="work.html#doorlock">門禁鎖</a><a href="work.html#hud">機車 HUD</a><a href="work.html#omni">全向輪底盤</a></dd>
+      <dt>Flutter · Kotlin</dt><dd><a href="work.html#fusion">感測器融合平台</a><a href="work.html#hud">機車 HUD</a><a href="work.html#capsule">時空膠囊</a><a href="work.html#inori">Inori</a></dd>
+      <dt>React · Vue · Astro</dt><dd><a href="work.html#inori">Inori</a><a href="work.html#ncumap">校園地圖</a><a href="work.html#ncf">Course Finder</a><a href="work.html#bnweb">BoltNut 網站</a></dd>
+      <dt>Python · FastAPI</dt><dd><a href="work.html#inori">Inori</a><a href="work.html#fincoach">FinCoach 後端</a><a href="work.html#bnmem">Boltnut-Memory</a><a href="work.html#lvn">影片轉筆記</a><a href="work.html#cycloid">減速機產生器</a></dd>
+      <dt>Cloudflare</dt><dd><a href="work.html#doorlock">門禁鎖</a><a href="work.html#bnweb">BoltNut 網站</a></dd>
+      <dt>Linux · Tailscale</dt><dd><a href="hrist.html#cfd">Hrist CFD 伺服器</a><a href="work.html#inori">Inori</a></dd>
+    </dl>
+  </section>
+
+  <p class="next"><a href="work.html">上一份：作品</a><a href="./">回首頁</a></p>
+
+  <footer>
+    <span>Valkyrie Lab · Shaun Sun</span>
+    <span>2026.11 更新</span>
+  </footer>
+</div>
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hrist · Shaun Sun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="mark" href="./">VALKYRIE LAB<span>個人紀錄</span></a>
+    <nav aria-label="頁面導覽">
+      <a href="./">首頁</a>
+      <a href="hrist.html" aria-current="page">Hrist</a>
+      <a href="geiravor.html">Geiravör</a>
+      <a href="work.html">作品</a>
+      <a href="about.html">關於</a>
+    </nav>
+  </header>
+
+  <div class="page-head">
+    <h1 class="tc"><span class="ep">專案紀錄　飛行器</span><span class="k"><span class="big">Hrist</span><span>半環翼</span></span><span class="en">Half-ring wing · current version C7</span></h1>
+  </div>
+
+  <article class="proj fr" id="hrist">
+    <div class="p-bar"><span>Hrist · C7 · 2026.10.30</span><span class="stamp s-now">進行中</span></div>
+    <div class="p-head">
+      <h3>Hrist<small>半環翼固定翼機</small></h3>
+      <p class="meta">飛行器 · 2026.10</p>
+    </div>
+    <div class="p-body">
+      <p>V 尾、拉進式的半環翼機，兩顆馬達裝在機翼上的莢艙前端。翼型研究、CFD 批次模擬、飛行模擬模型都是為了它做的。CFD 跑在家裡自己架的 Ubuntu 伺服器上，結果整理成氣動表接進 JSBSim，再到 FlightGear 裡飛。機身預留了 DJI O4 的相機座。</p>
+      <p>目前是 C7 版：莢艙回到 C4 的高度、莢艙機鼻縮短改成斜面，馬達下傾 10°，起落架沿用 C5 的鋼絲腳架。</p>
+      <ul class="subs">
+        <li><span>翼型研究</span><span class="stamp s-done">完成</span></li>
+        <li><span>CFD 批次模擬</span><span class="stamp s-now">進行中</span></li>
+        <li><span>飛行模擬模型（C7）</span><span class="stamp s-done">完成</span></li>
+        <li><span>機體 CAD</span><span class="stamp s-now">進行中</span></li>
+      </ul>
+      <p class="tools">SOLIDWORKS · XFOIL · XFLR5 · OpenFOAM · JSBSim · FlightGear · Blender · Python</p>
+    </div>
+    <dl class="p-spec">
+      <dt>目前版本</dt><dd>C7（2026.10.30）</dd>
+      <dt>佈局</dt><dd>半環翼 · V 尾 · 雙發拉進</dd>
+      <dt>馬達</dt><dd>下傾 10°</dd>
+      <dt>半環翼翼型</dt><dd>NACA0008 · SD7037</dd>
+      <dt>V1 主翼</dt><dd>1.75 × 0.22 m · NACA 4412</dd>
+      <dt>CFD</dt><dd>simpleFoam · k-ω SST</dd>
+      <dt>C7 網格</dt><dd>669,473 cells</dd>
+      <dt>C7 中性點</dt><dd>距機鼻 235.1 mm</dd>
+      <dt>機身散熱</dt><dd>15 m/s 時 6.5 L/s</dd>
+      <dt>早期掃描</dt><dd>o4r 版 · 5–20 m/s · α −4° ~ 36°</dd>
+      <dt>模型轉換</dt><dd>STEP → FreeCAD → Blender → FlightGear</dd>
+    </dl>
+
+    <figure class="viewer fr" id="cfd">
+      <div class="panel-h"><span>CFD · C7 · 攻角 4° · 15 m/s</span><span>Surface Cp / streamlines</span></div>
+      <div class="v-stage">
+        <canvas id="hr-3d" aria-label="Hrist 在 15 m/s、攻角 4° 的 CFD 結果：機身表面壓力與流線，可拖曳旋轉、滾輪縮放"></canvas>
+        <span class="v-load" id="hr-load">LOADING…</span>
+        <div class="rack fr">
+          <dl>
+            <dt>V∞</dt><dd>15 m/s</dd>
+            <dt>α / β</dt><dd>4° / 0°</dd>
+            <dt>PROP</dt><dd>off</dd>
+            <dt>MODEL</dt><dd>RANS k-ω SST</dd>
+            <dt>MESH</dt><dd>669k cells</dd>
+            <dt>C<sub>L</sub></dt><dd>0.226</dd>
+            <dt>C<sub>D</sub></dt><dd>0.0503</dd>
+            <dt>L/D</dt><dd>4.48</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="v-ctl">
+        <button type="button" class="tg" id="hr-cp" aria-pressed="true">表面壓力</button>
+        <button type="button" class="tg" id="hr-st" aria-pressed="true">流線</button>
+      </div>
+      <div class="legend">
+        <div class="leg"><span>機身表面 Cp（藍＝吸力，橘紅＝壓力）</span><i id="leg-cp"></i><em><b>−1</b><b>0</b><b>+1</b></em></div>
+        <div class="leg"><span>流線：流速比 |U| / V∞（綠＝跟來流一樣快）</span><i id="leg-sp"></i><em><b>0</b><b>1.4</b></em></div>
+      </div>
+      <figcaption class="note">機鼻和前緣是停滯點，機翼上表面吸力最強。機體是 C7 的機身零件 test.STL（不含起落架），表面壓力取自 C7 那次模擬。拖曳旋轉，滾輪或雙指縮放。</figcaption>
+    </figure>
+
+    <div class="media">
+      <figure class="foil"><img src="media/naca4412.png" alt="NACA 4412 翼型剖面與中弧線" loading="lazy"><figcaption>NACA 4412 · V1 主翼</figcaption></figure>
+      <figure class="foil"><img src="media/naca0008.png" alt="NACA 0008 對稱翼型剖面" loading="lazy"><figcaption>NACA 0008 · 半環翼候選</figcaption></figure>
+      <figure class="foil"><img src="media/sd7037.png" alt="SD7037 翼型剖面與中弧線" loading="lazy"><figcaption>SD7037 · 半環翼候選</figcaption></figure>
+    </div>
+  </article>
+
+  <section id="log" aria-labelledby="log-h">
+    <h2 class="tc" id="log-h"><span class="ep">附錄</span><span class="k"><span class="big">改版</span><span>紀錄</span></span><span class="en">Revision log</span></h2>
+    <p class="sec-note">每一版都在 lena 上跑過同一套評估流程，數字是 15 m/s、攻角 4°、關動力。</p>
+    <ol class="log">
+      <li><time>10.24</time><b>o4r</b><span>3 吋推進式，加上機身內部散熱艙道。攻角 −4° 到 60° 的完整掃描，飛行模擬模型的第一版就是用這組資料。</span></li>
+      <li><time>10.29</time><b>C4</b><span>改成 5 吋拉進式，馬達裝在翼下副翼舵機莢艙的前端。全油門大攻角時會抬頭，升降舵壓不回來。</span></li>
+      <li><time>10.29</time><b>C5</b><span>馬達艙抬高 15 mm 解決抬頭，換成鋼絲起落架。但艙擋到機翼前緣的吸力區，C<sub>D</sub> 從 0.0475 漲到 0.0546。</span></li>
+      <li><time>10.30</time><b>C4 + 下推 10°</b><span>不抬高、改成馬達下推 10° 的對照組：俯仰效果跟抬高一樣，巡航代價只有約七分之一。</span></li>
+      <li><time>10.30</time><b>C7</b><span>莢艙回到 C4 高度、下推 10°。C<sub>D</sub> 比 C5 少 11%，側向穩定接近 o4r。目前的版本。</span></li>
+      <li><time>10.31</time><b>C7 模擬器</b><span>JSBSim／FlightGear 暫定版，可以滑跑起降：模擬全油門滑跑 13.2 m 離地。</span></li>
+    </ol>
+  </section>
+
+  <p class="next"><a href="./">首頁</a><a href="geiravor.html">下一份：Geiravör</a></p>
+
+  <footer>
+    <span>Valkyrie Lab · Shaun Sun</span>
+    <span>2026.11 更新</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

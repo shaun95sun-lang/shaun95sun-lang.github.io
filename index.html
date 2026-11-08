@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shaun Sun · Valkyrie Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="mark" href="./">VALKYRIE LAB<span>個人紀錄</span></a>
+    <nav aria-label="頁面導覽">
+      <a href="./" aria-current="page">首頁</a>
+      <a href="hrist.html">Hrist</a>
+      <a href="geiravor.html">Geiravör</a>
+      <a href="work.html">作品</a>
+      <a href="about.html">關於</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="ep">個人紀錄　壹</p>
+      <h1 id="name" aria-label="Shaun"><span class="ln l2">SHAUN</span></h1>
+      <p class="cap">Fixed-wing UAV · CAD · CFD · Embedded</p>
+    </div>
+  </div>
+  <p class="lede">中央大學機械系大二。平常在做<b>固定翼無人機</b>：畫 CAD、挑翼型、跑 CFD，再丟進模擬器試飛。需要的韌體、App 和小工具也順手自己寫。</p>
+
+  <div class="tunnel fr">
+    <div class="panel-h"><span>風洞 · NACA 4412</span><span>Hrist V1 主翼剖面 · 面板法勢流</span></div>
+    <div class="t-view">
+      <canvas id="flow" aria-label="NACA 4412 翼型的氣流動畫，可調整攻角"></canvas>
+      <div class="banner top" aria-hidden="true"><span class="hzb"></span><span class="msg"><b>警告</b><span class="en">STALL WARNING</span></span><span class="hzb"></span></div>
+      <div class="banner bot" role="status"><span class="hzb"></span><span class="msg"><small>攻角超過 12°，上表面氣流開始分離</small></span><span class="hzb"></span></div>
+    </div>
+    <div class="tunnel-bar">
+      <label for="aoa-in">攻角 <input type="range" id="aoa-in" min="-4" max="16" step="0.5" value="4"></label>
+      <span class="aoa"><i>α</i><b id="aoa-out">+04.0</b>DEG</span>
+      <span class="state" id="state">NORMAL</span>
+      <span>流線是用面板法算出來的勢流。滑鼠在畫面上下移動也可以改攻角，拉到 12° 以上看看。</span>
+    </div>
+  </div>
+
+  <section aria-labelledby="work-h">
+    <h2 class="tc" id="work-h"><span class="ep">第壹節</span><span class="k"><span class="big">最近</span><span>在做</span></span><span class="en">Current operations</span></h2>
+    <p class="sec-note">挑幾個比較能代表我的，點進去看細節。</p>
+    <ul class="index">
+      <li><a href="hrist.html"><span class="p-bar"><span>Hrist · Half-ring wing</span><span class="stamp s-now">進行中</span></span><span class="nm">Hrist<small>半環翼固定翼機。C7 版的 CFD 流場可以直接轉著看。</small></span></a></li>
+      <li><a href="geiravor.html"><span class="p-bar"><span>Geiravör · Canard delta pusher</span><span class="stamp s-plan">規劃中</span></span><span class="nm">Geiravör<small>0.9 m 鴨翼三角翼推進式，研究低速高攻角控制。</small></span></a></li>
+      <li><a href="work.html#fusion"><span class="p-bar"><span>Sensor fusion · Multi-IMU logger</span><span class="stamp s-now">進行中</span></span><span class="nm">感測器融合平台<small>雙 IMU、磁力計、氣壓計，ESP32-S3 記錄再用 BLE 同步。</small></span></a></li>
+      <li><a href="work.html#doorlock"><span class="p-bar"><span>Door lock · BLE access</span><span class="stamp s-done">完成</span></span><span class="nm">BLE 門禁鎖<small>只認一支註冊過的手機，紀錄可以在 Cloudflare 上查。</small></span></a></li>
+      <li><a href="work.html#inori"><span class="p-bar"><span>Inori · Personal AI</span><span class="stamp s-now">進行中</span></span><span class="nm">Inori<small>自己的 AI 助理，模型跑在家裡的 GPU 主機上。</small></span></a></li>
+      <li><a href="work.html#photo"><span class="p-bar"><span>Photography · Field record</span><span class="stamp s-done">持續更新</span></span><span class="nm">攝影<small>不做機器的時候會出去拍照。</small></span></a></li>
+    </ul>
+    <p class="next"><a href="work.html">全部作品</a><a href="about.html">工具與聯絡方式</a></p>
+  </section>
+
+  <footer>
+    <span>Valkyrie Lab · Shaun Sun</span>
+    <span>2026.11 更新</span>
+  </footer>
+</div>
+
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>作品 · Shaun Sun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="mark" href="./">VALKYRIE LAB<span>個人紀錄</span></a>
+    <nav aria-label="頁面導覽">
+      <a href="./">首頁</a>
+      <a href="hrist.html">Hrist</a>
+      <a href="geiravor.html">Geiravör</a>
+      <a href="work.html" aria-current="page">作品</a>
+      <a href="about.html">關於</a>
+    </nav>
+  </header>
+
+  <div class="page-head">
+    <h1 class="tc"><span class="ep">第貳節</span><span class="k"><span class="big">作品</span><span>紀錄</span></span><span class="en">Project files</span></h1>
+    <p class="sec-note">飛行器的兩架在各自的頁面：<a href="hrist.html">Hrist</a>、<a href="geiravor.html">Geiravör</a>。</p>
+  </div>
+
+  <article class="proj fr" id="fusion">
+    <div class="p-bar"><span>Sensor fusion · Multi-IMU logger</span><span class="stamp s-now">進行中</span></div>
+    <div class="p-head">
+      <h3>感測器融合平台<small>低成本多 IMU 記錄器</small></h3>
+      <p class="meta">嵌入式 · 2026.10</p>
+    </div>
+    <div class="p-body">
+      <p>同一塊板上裝兩顆 IMU、一顆磁力計、一顆氣壓計，ESP32-S3 把原始資料寫進 microSD，再用 BLE 跟手機 App 同步。開始接線前先寫了一份決策書，把要量什麼、資料怎麼存先定下來。</p>
+      <p class="note">10/17 測試用的第二支手機壞了，目前先用一支手機測。</p>
+      <p class="tools">PlatformIO · C++ · Flutter · BLE</p>
+    </div>
+    <dl class="p-spec">
+      <dt>主控</dt><dd>ESP32-S3-CAM N16R8</dd>
+      <dt>IMU</dt><dd>MPU6050 · MPU9250</dd>
+      <dt>磁力計</dt><dd>AK8963</dd>
+      <dt>氣壓計</dt><dd>BMP280</dd>
+      <dt>匯流排</dt><dd>雙 I²C</dd>
+      <dt>App</dt><dd>Flutter · START / STOP / SYNC</dd>
+    </dl>
+  </article>
+
+  <article class="proj fr" id="doorlock">
+    <div class="p-bar"><span>Door lock · BLE access</span><span class="stamp s-done">完成</span></div>
+    <div class="p-head">
+      <h3>BLE 門禁鎖<small>ESP32-C3</small></h3>
+      <p class="meta">嵌入式 · 2026.10</p>
+    </div>
+    <div class="p-body">
+      <p>只認一支已經註冊過的手機。手機用 Android App 開門，開關門的紀錄可以匯出，也可以在 Cloudflare 上的管理頁查。</p>
+      <p class="note">少數我有乖乖用 git 管的專案。</p>
+      <p class="tools">ESP32-C3 · BLE · Android · Cloudflare</p>
+    </div>
+    <dl class="p-spec">
+      <dt>驗證</dt><dd>P-256 公鑰 · 單一手機</dd>
+      <dt>時間</dt><dd>NTP 校時 · 斷電保持</dd>
+      <dt>紀錄</dt><dd>事件可匯出</dd>
+      <dt>管理</dt><dd>Cloudflare 管理頁</dd>
+    </dl>
+  </article>
+
+  <article class="proj fr" id="inori">
+    <div class="p-bar"><span>Inori · Personal AI</span><span class="stamp s-now">進行中</span></div>
+    <div class="p-head">
+      <h3>Inori<small>自己的 AI 助理</small></h3>
+      <p class="meta">軟體 · 2026.10</p>
+    </div>
+    <div class="p-body">
+      <p>手機或網頁送出請求，經過 API 轉到家裡的 GPU 主機上跑本機模型，整套都在自己的私有網路裡。Android App 可以遠端更新。</p>
+      <p class="note">推論跟 Hrist 的 CFD 用的是同一台 5070。</p>
+      <p class="tools">FastAPI · React · Kotlin · Tailscale</p>
+    </div>
+    <dl class="p-spec">
+      <dt>前端</dt><dd>React / Vite · Kotlin</dd>
+      <dt>後端</dt><dd>FastAPI</dd>
+      <dt>推論</dt><dd>Ubuntu · RTX 5070</dd>
+      <dt>網路</dt><dd>Tailscale</dd>
+    </dl>
+  </article>
+
+  <article class="proj fr" id="photo">
+    <div class="p-bar"><span>Photography · Field record</span><span class="stamp s-done">持續更新</span></div>
+    <div class="p-head">
+      <h3>攝影<small>個人攝影紀錄</small></h3>
+      <p class="meta">攝影</p>
+    </div>
+    <div class="p-body">
+      <p>不做機器的時候會出去拍照，拍到的東西都放在這個帳號。</p>
+      <p><a class="ig" href="https://www.instagram.com/depictlife._.forever/" target="_blank" rel="noopener">@depictlife._.forever</a></p>
+    </div>
+    <dl class="p-spec">
+      <dt>平台</dt><dd>Instagram</dd>
+    </dl>
+  </article>
+
+  <section id="other" aria-labelledby="other-h">
+    <h2 class="tc" id="other-h"><span class="ep">第參節</span><span class="k"><span class="big">其他</span><span>東西</span></span><span class="en">Archive</span></h2>
+    <div class="groups">
+      <div class="group">
+        <h3>飛行器 · 機構</h3>
+        <ul class="list">
+          <li id="testbed"><b>1.2 m 級測試機</b><span class="stamp s-plan">規劃中</span><span class="d">專題用的姿態模擬試驗機。</span><span class="t">SOLIDWORKS</span></li>
+          <li id="omni"><b>全向輪底盤</b><span class="stamp s-now">進行中</span><span class="d">BoltNut 社團的 omni 底盤，ESP32-S3 控制。</span><span class="t">SOLIDWORKS · ESP32-S3 · 25GA370</span></li>
+          <li id="cycloid"><b>雙擺線減速機產生器</b><span class="stamp s-plan">規劃中</span><span class="d">輸入參數就產生 10:1 雙擺線減速機的 DXF。同系列還有 swerve 舵輪底盤的 CAD 和 BOM。</span><span class="t">Python → DXF · SOLIDWORKS</span></li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>嵌入式</h3>
+        <ul class="list">
+          <li id="hud" class="has-thumb"><b>機車 HUD</b><span class="stamp s-done">完成</span><span class="d">手機讀 GPS 車速，用 BLE 傳給 ESP32，顯示在 OLED 再反射到擋風玻璃。</span><span class="t">ESP32 · SSD1315 · U8g2 · Flutter</span><img class="thumb" src="media/hud.jpg" alt="手上拿著 OLED 螢幕，顯示 TEST OK" loading="lazy"></li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>社團</h3>
+        <ul class="list">
+          <li id="bnweb"><b>BoltNut 社團網站</b><span class="stamp s-done">完成</span><span class="d">社團官網加一個自己寫的後台，幹部可以直接改內容、換圖。</span><span class="t">Astro · Cloudflare Pages Functions</span></li>
+          <li id="bnmem"><b>Boltnut-Memory</b><span class="stamp s-now">進行中</span><span class="d">記下每次例會討論了什麼、決定了什麼，之後查得到當初為什麼這樣決定。</span><span class="t">Python · SQLite</span></li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>軟體</h3>
+        <ul class="list">
+          <li id="fincoach"><b>FinCoach AI 財務健診</b><span class="stamp s-done">完成</span><span class="d">團隊專題，我負責後端。填問卷產生投資人格報告，再接 AI 諮詢和保單分析。</span><span class="t">Python · Firebase · Supabase · LanceDB</span></li>
+          <li id="ncumap"><b>中央校園與美食地圖</b><span class="stamp s-done">完成</span><span class="d">中央路、宵夜街的互動地圖，改到第 4 版。</span><span class="t">Vue 3 · Python</span></li>
+          <li id="ncf"><b>NCU Course Finder</b><span class="stamp s-now">進行中</span><span class="d">選課輔助工具：網頁、瀏覽器擴充、伺服器三塊。</span><span class="t">Vue 3 · Vite · Node</span></li>
+          <li id="lvn"><b>課程影片轉筆記</b><span class="stamp s-done">完成</span><span class="d">上課錄影丟進去，出來是 Markdown 筆記，全程在本機跑。</span><span class="t">Python</span></li>
+          <li id="pdf"><b>PDF Splitter</b><span class="stamp s-done">完成</span><span class="d">切 PDF 的小工具，桌面、網頁、手機各一版。</span><span class="t">Python GUI · Capacitor</span></li>
+          <li id="capsule"><b>時空膠囊 App</b><span class="stamp s-done">完成</span><span class="d">寫給未來的訊息。先做 Kotlin + Node 版，後來用 Flutter 重寫。</span><span class="t">Kotlin · Node.js · Flutter</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <p class="next"><a href="geiravor.html">上一份：Geiravör</a><a href="about.html">下一份：工具與關於</a></p>
+
+  <footer>
+    <span>Valkyrie Lab · Shaun Sun</span>
+    <span>2026.11 更新</span>
+  </footer>
+</div>
+<script src="site.js"></script>
+</body>
+</html>
