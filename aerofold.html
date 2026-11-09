@@ -57,11 +57,18 @@
       <dt>ADAMS</dt><dd>0 自由度 · 無冗餘約束 · 終點 120.007°</dd>
     </dl>
     <figure class="viewer fr">
-      <div class="panel-h"><span>Fold sim · AeroFold V2</span><span>Kinematics</span></div>
+      <div class="panel-h"><span>Fold sim · AeroFold V2</span><span>Closed form</span></div>
       <div class="v-stage">
         <iframe src="aerofold-viewer.html#theme=dark" title="AeroFold V2 組裝與機翼折疊 3D 模擬，可以旋轉、縮放、播放折疊" loading="lazy" allowfullscreen></iframe>
       </div>
       <figcaption class="note" style="border-top: 1px solid var(--or-line)">拖曳旋轉，滾輪或雙指縮放，按「播放折疊」看整段動作。紅線是鉸鏈軸和梭座到翼上固定點的連線。<a href="aerofold-viewer.html">全螢幕開啟</a></figcaption>
+    </figure>
+    <figure class="viewer fr" id="adams">
+      <div class="panel-h"><span>ADAMS · AeroFold V2</span><span>Solver output · 451 steps</span></div>
+      <div class="v-stage">
+        <iframe src="aerofold-adams-viewer.html#theme=dark" title="ADAMS 運動學解驅動的 AeroFold V2 機翼折疊動畫，含翼尖軌跡和時間曲線" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <figcaption class="note" style="border-top: 1px solid var(--or-line)">由 ADAMS 2025.1 的運動學解直接驅動：梭座 2 s 往前拉 277.9 mm，翼折到 120°，停 0.5 s，再 2 s 展開。紅色弧線是 ADAMS 算出的翼尖軌跡，和上面的公式解差不到 0.005 mm。<a href="aerofold-adams-viewer.html">全螢幕開啟</a></figcaption>
     </figure>
   </article>
 
