@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="site.css?v=20261110c">
+<link rel="stylesheet" href="site.css?v=20261110d">
 </head>
 <body>
 <div class="wrap">
@@ -32,7 +32,7 @@
   <article class="proj fr" id="fusion">
     <div class="p-bar"><span>Sensor fusion · Multi-IMU logger</span><span class="stamp s-now">進行中</span></div>
     <div class="p-head">
-      <h3>感測器融合平台<small>低成本多 IMU 記錄器</small></h3>
+      <h3>感測器<wbr>融合平台<small>低成本多 IMU 記錄器</small></h3>
       <p class="meta">嵌入式 · 2026.10</p>
     </div>
     <div class="p-body">
@@ -105,42 +105,180 @@
 
   <section id="other" aria-labelledby="other-h">
     <h2 class="tc" id="other-h"><span class="ep">第參節</span><span class="k"><span class="big">其他</span><span>東西</span></span><span class="en">Archive</span></h2>
+    <p class="sec-note">點任一項，右邊會打開小卡，說明它具體在做什麼。</p>
     <div class="groups">
       <div class="group">
         <h3>飛行器 · 機構</h3>
         <ul class="list">
-          <li id="testbed"><b>1.2 m 級測試機</b><span class="stamp s-plan">規劃中</span><span class="d">專題用的姿態模擬試驗機。</span><span class="t">SOLIDWORKS</span></li>
-          <li id="omni"><b>全向輪底盤</b><span class="stamp s-now">進行中</span><span class="d">BoltNut 社團的 omni 底盤，ESP32-S3 控制。</span><span class="t">SOLIDWORKS · ESP32-S3 · 25GA370</span></li>
-          <li id="cycloid"><b>雙擺線減速機產生器</b><span class="stamp s-plan">規劃中</span><span class="d">輸入參數就產生 10:1 雙擺線減速機的 DXF。同系列還有 swerve 舵輪底盤的 CAD 和 BOM。</span><span class="t">Python → DXF · SOLIDWORKS</span></li>
+          <li id="testbed"><b>1.2 m 級測試機</b><span class="stamp s-plan">規劃中</span><span class="d">專題用的姿態模擬試驗機。</span><span class="t">SOLIDWORKS</span>
+            <div class="more" hidden>
+              <p>專題用的 1.2 m 級固定翼試驗機，做姿態模擬相關的實驗。</p>
+              <p>目前還在 SOLIDWORKS 設計階段，細節整理中。</p>
+            </div>
+          </li>
+          <li id="omni"><b>三輪 omni 底盤</b><span class="stamp s-now">進行中</span><span class="d">BoltNut 社團的全向輪底盤，用 SolidWorks API 腳本建模。</span><span class="t">SOLIDWORKS API · Python · ESP32-S3 · JGA25-370</span>
+            <div class="more" hidden>
+              <p>BoltNut 機器人社的三輪全向底盤。這版的特別之處是<b>用 Python 透過 SolidWorks API 建模</b>：所有尺寸集中在一個設計檔，零件由腳本產生，改尺寸就能重建。</p>
+              <ul>
+                <li>3 組 omni 輪模組：輪轂、12 顆滾子、JGA25-370 馬達與馬達座</li>
+                <li>每個輪子都裝 AS5600 磁編碼器量轉角，支架和磁鐵座是自己設計的</li>
+                <li>控制：ESP32-S3、TB6612FNG 馬達驅動 ×2、降壓模組，3 串 18650 供電</li>
+                <li>規則：先在電腦裡找現成模型，找不到才自己建</li>
+              </ul>
+              <p class="note">新零件已建完，下一步是依排針位置幫上層板開槽，再組總組合件做干涉檢查。</p>
+            </div>
+          </li>
+          <li id="cycloid"><b>擺線減速機 R&amp;D</b><span class="stamp s-now">進行中</span><span class="d">可列印的 10:1 擺線減速機，從參數產生幾何，已改到 v0.7。同系列還有 swerve 舵輪底盤的 CAD 和 BOM。</span><span class="t">Python · SOLIDWORKS · PETG · AS5600 · ESP32</span>
+            <div class="more" hidden>
+              <p>給機器手臂用的擺線減速機，目標是用 Bambu X1C 印 PETG，搭配金屬銷和標準軸承。幾何由 Python 依參數產生，也會產生網頁 3D 檢視器和爆炸圖。</p>
+              <ul>
+                <li><b>v0.4</b>：11 針、10:1、側邊繩捲筒輸出，MG996R 和 JGA25-370 兩種馬達版本；完成 SolidWorks 組合件、干涉檢查和列印檔</li>
+                <li><b>配合試片</b>：先印一盤 18 件試片，確認孔補償 +0.2 mm 和軸承配合，再印減速機</li>
+                <li><b>v0.5</b>：輸出改成通用法蘭，可以直接接手臂；齒輪 1:1 帶動 AS5600 量輸出角度</li>
+                <li><b>v0.6</b>：感測齒輪改 1:5，角度解析度提高 5 倍</li>
+                <li><b>v0.7</b>：橡皮筋把感測擺臂拉向輸出齒輪，雙齒面接觸消除齒隙</li>
+              </ul>
+              <p>另外寫了 ESP32 測試韌體，搭配 AS5600 讀輸出角度。</p>
+            </div>
+          </li>
         </ul>
       </div>
       <div class="group">
         <h3>嵌入式</h3>
         <ul class="list">
-          <li id="hud" class="has-thumb"><b>機車 HUD</b><span class="stamp s-done">完成</span><span class="d">手機讀 GPS 車速，用 BLE 傳給 ESP32，顯示在 OLED 再反射到擋風玻璃。</span><span class="t">ESP32 · SSD1315 · U8g2 · Flutter</span><img class="thumb" src="media/hud.jpg" alt="手上拿著 OLED 螢幕，顯示 TEST OK" loading="lazy"></li>
+          <li id="hud" class="has-thumb"><b>機車 HUD</b><span class="stamp s-done">完成</span><span class="d">手機讀 GPS 車速，用 BLE 傳給 ESP32，顯示在 OLED 再反射到擋風玻璃。</span><span class="t">ESP32 · SSD1315 · U8g2 · Flutter</span><img class="thumb" src="media/hud.jpg" alt="手上拿著 OLED 螢幕，顯示 TEST OK" loading="lazy">
+            <div class="more" hidden>
+              <p>騎車時不用低頭看手機的抬頭顯示器。</p>
+              <ul>
+                <li>Flutter App 讀手機 GPS 車速，透過 BLE 傳給 ESP32</li>
+                <li>ESP32 用 U8g2 把數字畫在 SSD1315 OLED 上，再反射到擋風玻璃</li>
+                <li>手機和 ESP32 之間的資料格式自己定，有寫成協定文件</li>
+                <li>外殼用 SOLIDWORKS 畫</li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
       <div class="group">
         <h3>社團</h3>
         <ul class="list">
-          <li id="bnweb"><b>BoltNut 社團網站</b><span class="stamp s-done">完成</span><span class="d">社團官網加一個自己寫的後台，幹部可以直接改內容、換圖。</span><span class="t">Astro · Cloudflare Pages Functions</span></li>
-          <li id="bnmeet"><b>語音會議記錄</b><span class="stamp s-now">進行中</span><span class="d">例會即時逐字稿、說話者辨識，兩個模型互相複核，會後整理決議和待辦。細節在 <a href="ai.html#meeting">AI 共同實作</a>。</span><span class="t">Python · FastAPI · TEA-ASR · Breeze-ASR</span></li>
-          <li id="bnmem"><b>Boltnut-Memory</b><span class="stamp s-now">進行中</span><span class="d">記下每次例會討論了什麼、決定了什麼，之後查得到當初為什麼這樣決定。</span><span class="t">Python · SQLite</span></li>
+          <li id="bnweb"><b>BoltNut 社團網站</b><span class="stamp s-done">完成</span><span class="d">社團官網加一個自己寫的後台，幹部可以直接改內容、換圖。</span><span class="t">Astro · Cloudflare Pages Functions</span>
+            <div class="more" hidden>
+              <p>BoltNut 機器人社的官網。前台用 Astro，另外寫了一個內容管理後台，幹部不用碰程式碼就能改文字、換照片。</p>
+              <ul>
+                <li>三個環境：本機開發 → GitHub Pages 測試 → Cloudflare Pages 正式上線</li>
+                <li>GitHub 的 main 分支是唯一正本，Cloudflare 只負責部署</li>
+                <li>每次 push 都會自動跑檢查和建置，沒過就不會上線</li>
+              </ul>
+            </div>
+          </li>
+          <li id="bnmeet"><b>語音會議記錄</b><span class="stamp s-now">進行中</span><span class="d">例會即時逐字稿、說話者辨識，兩個模型互相複核，會後整理決議和待辦。</span><span class="t">Python · FastAPI · TEA-ASR · Breeze-ASR</span>
+            <div class="more" hidden>
+              <p>機器人社開會很吵、很多人搶話，又中英夾雜。這套系統在本機即時產生逐字稿並分辨說話者，會後自動整理決議、待辦和待解問題。</p>
+              <ul>
+                <li>TEA-ASR 即時辨識，Breeze-ASR 在背景重聽同一句，兩邊不一致就標 ⚠</li>
+                <li>會後由語言模型對 ⚠ 句提出修正建議，要人按「採用」才會替換</li>
+                <li>原始逐字稿只追加不修改，每一句都能還原</li>
+                <li>手機可以透過 Tailscale 當麥克風，錄音不離開自己的網路</li>
+              </ul>
+              <p><a href="ai.html#meeting">完整架構在 AI 共同實作頁</a></p>
+            </div>
+          </li>
+          <li id="bnmem"><b>Boltnut-Memory</b><span class="stamp s-now">進行中</span><span class="d">記下每次例會討論了什麼、決定了什麼，之後查得到當初為什麼這樣決定。</span><span class="t">Python · SQLite</span>
+            <div class="more" hidden>
+              <p>社團的會議記憶與決策管理器。把例會記錄匯入後，整理成決策紀錄和待辦看板，之後可以查到某個決定是哪一次會議、為什麼這樣定的。</p>
+              <ul>
+                <li>獨立的 Web UI、HTTP API 和 SQLite 資料庫，本地優先</li>
+                <li>社員帳號：管理者建立帳號，社員第一次登入要改密碼；密碼加鹽雜湊保存</li>
+                <li>權限分級：社員只能讀已核准的內容、更新指派給自己的待辦；匯入、核准、改決策要管理者</li>
+                <li>只在 Tailscale 私有網路內開放</li>
+                <li>深度統整交給家裡伺服器上的語言模型，一次只跑一筆，避免重複載入模型</li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
       <div class="group">
         <h3>軟體</h3>
         <ul class="list">
-          <li id="fincoach"><b>FinCoach AI 財務健診</b><span class="stamp s-done">完成</span><span class="d">財務決策 App，我負責前端 UI、系統架構和 AI 整合，做完整個使用流程：填問卷產生投資人格報告，再接 AI 諮詢和保單分析。</span><span class="t">React · Python · Firebase · Supabase · LanceDB</span></li>
-          <li id="ncumap"><b>中央校園與美食地圖</b><span class="stamp s-done">完成</span><span class="d">中央路、宵夜街的互動地圖，改到第 4 版。</span><span class="t">Vue 3 · Python</span></li>
-          <li id="ncf"><b>NCU Course Finder</b><span class="stamp s-now">進行中</span><span class="d">選課輔助工具：網頁、瀏覽器擴充、伺服器三塊。</span><span class="t">Vue 3 · Vite · Node</span></li>
-          <li id="lvn"><b>課程影片轉筆記</b><span class="stamp s-done">完成</span><span class="d">上課錄影丟進去，出來是 Markdown 筆記，全程在本機跑。</span><span class="t">Python</span></li>
-          <li id="pdf"><b>PDF Splitter</b><span class="stamp s-done">完成</span><span class="d">切 PDF 的小工具，桌面、網頁、手機各一版。</span><span class="t">Python GUI · Capacitor</span></li>
-          <li id="capsule"><b>時空膠囊 App</b><span class="stamp s-done">完成</span><span class="d">寫給未來的訊息。先做 Kotlin + Node 版，後來用 Flutter 重寫。</span><span class="t">Kotlin · Node.js · Flutter</span></li>
+          <li id="fincoach"><b>FinCoach AI 財務健診</b><span class="stamp s-done">完成</span><span class="d">財務決策 App，我負責前端 UI、系統架構和 AI 整合，做完整個使用流程。</span><span class="t">React · Node.js · Supabase · Ollama · Capacitor</span>
+            <div class="more" hidden>
+              <p>AI 財務健診平台：使用者填完問卷，就拿到個人化的投資人格報告，再用 AI 諮詢和保單分析了解自己的財務狀況。我負責前端 UI、系統架構和 AI 整合。</p>
+              <ul>
+                <li>19 題問卷量「自信分 × 行動分」，分出 5 種投資人格</li>
+                <li>本機語言模型即時生成人格報告</li>
+                <li>AI 諮詢：先判斷問題類型，再帶入保單內容回答，並記住對話</li>
+                <li>上傳保單 PDF：切塊做向量檢索，可以問答、自動抓欄位</li>
+                <li>財務管理中心：資產負債表（外幣即時匯率）、收支表、退休缺口、記帳月曆</li>
+                <li>用 Capacitor 打包成 Android App</li>
+              </ul>
+              <p class="tools">架構：React/Vite 前端 → Supabase 存帳戶與財務資料；AI 服務走 Node.js 後端 → 本機 Ollama 模型</p>
+            </div>
+          </li>
+          <li id="ncumap"><b>中央校園與美食地圖</b><span class="stamp s-done">完成</span><span class="d">新生資訊網的校園地圖，負責 UI 繪製與介面設計，改到第 4 版。</span><span class="t">Vue 3 · Python</span>
+            <div class="more" hidden>
+              <p>給新生資訊網用的互動地圖，涵蓋校園、中央路和宵夜街的店家。我負責地圖的 UI 繪製和介面設計，目標是讓剛入學的新生找得到路、找得到吃的。</p>
+              <ul>
+                <li>從 v1 一路改到 v4</li>
+                <li>另外做了手機版版面</li>
+              </ul>
+            </div>
+          </li>
+          <li id="ncf"><b>NCU Course Finder</b><span class="stamp s-now">進行中</span><span class="d">選課輔助工具：網頁、瀏覽器擴充、伺服器三塊。</span><span class="t">Vue 3 · Vite · Node · Chrome 擴充</span>
+            <div class="more" hidden>
+              <p>選課和修課進度的個人儀表板。</p>
+              <ul>
+                <li><b>網頁</b>：Vue 3 + Vite 做的個人儀表板</li>
+                <li><b>瀏覽器擴充</b>：登入學校系統後，一鍵把資料同步到自己的伺服器</li>
+                <li><b>伺服器</b>：Node，只在自己的電腦和私有網路上跑</li>
+                <li>參考系上的應修科目表和課程地圖</li>
+              </ul>
+            </div>
+          </li>
+          <li id="lvn"><b>課程影片轉筆記</b><span class="stamp s-done">完成</span><span class="d">上課錄影丟進去，出來是 Markdown 筆記，全程在本機跑。</span><span class="t">Python · Whisper · Ollama</span>
+            <div class="more" hidden>
+              <p>把 YouTube 或本機的課程影片整理成結構化的 Markdown 筆記，不需要任何雲端 API。</p>
+              <ul>
+                <li>下載影片和字幕；字幕不夠時用 Whisper（GPU）轉文字</li>
+                <li>抽影格，用 OCR 讀投影片內容，再和逐字稿依時間對齊</li>
+                <li>本機語言模型合成筆記，關鍵定理再到 Wikipedia 交叉驗證</li>
+                <li>每支影片輸出逐字稿、OCR、時間軸和最後的筆記，每一步都能回查</li>
+              </ul>
+            </div>
+          </li>
+          <li id="pdf"><b>PDF Splitter</b><span class="stamp s-done">完成</span><span class="d">切 PDF 的小工具，桌面、網頁、手機各一版。</span><span class="t">Python GUI · Capacitor</span>
+            <div class="more" hidden>
+              <p>切 PDF 的小工具（例如把原文課本拆成章節），同一個功能做成三種版本：</p>
+              <ul>
+                <li><b>桌面</b>：Python GUI，打包成 Windows 執行檔</li>
+                <li><b>網頁</b>：單一 HTML 頁面，在瀏覽器裡處理</li>
+                <li><b>手機</b>：Capacitor 打包成 Android／iOS App</li>
+              </ul>
+            </div>
+          </li>
+          <li id="capsule"><b>時空膠囊 App</b><span class="stamp s-done">完成</span><span class="d">寫給未來的訊息。先做 Kotlin + Node 版，後來用 Flutter 重寫。</span><span class="t">Kotlin · Node.js · Flutter</span>
+            <div class="more" hidden>
+              <p>寫給未來的訊息。</p>
+              <ul>
+                <li>第一版：Android（Kotlin）App 加 Node.js 後端</li>
+                <li>第二版：用 Flutter 重寫，同一份程式可以跑在不同平台</li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
   </section>
+
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="false" aria-labelledby="drawer-h" hidden>
+    <div class="p-bar"><span id="drawer-cat">專案</span><button type="button" class="drawer-x" id="drawer-x" aria-label="關閉小卡">✕ 關閉</button></div>
+    <div class="drawer-body">
+      <h3 id="drawer-h"></h3>
+      <div id="drawer-stamp"></div>
+      <div id="drawer-more"></div>
+      <p class="tools" id="drawer-t"></p>
+    </div>
+  </aside>
 
   <p class="next"><a href="ai.html">上一份：AI 共同實作</a><a href="about.html">下一份：工具與關於</a></p>
 
@@ -149,6 +287,7 @@
     <span>2026.11 更新</span>
   </footer>
 </div>
-<script src="site.js?v=20261110c"></script>
+<script src="site.js?v=20261110d"></script>
+<script src="drawer.js?v=20261110d"></script>
 </body>
 </html>

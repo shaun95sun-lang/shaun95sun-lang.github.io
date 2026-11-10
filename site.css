@@ -147,7 +147,7 @@ section { margin-top: clamp(88px, 12vw, 148px); }
 }
 .p-bar { grid-column: 1 / -1; margin: 0 -22px; padding: 7px 12px 7px 22px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; border-bottom: 1px solid var(--or-line); font: 700 14px/1.2 var(--cond); letter-spacing: .2em; text-transform: uppercase; color: var(--or); }
 .p-head { display: grid; gap: 10px; align-content: start; }
-h3 { font-family: var(--title); font-stretch: 66%; font-weight: 900; font-size: clamp(36px, 4.2vw, 54px); line-height: .92; color: var(--paper); }
+h3 { font-family: var(--title); font-stretch: 66%; font-weight: 900; font-size: clamp(36px, 4.2vw, 54px); line-height: .92; color: var(--paper); word-break: keep-all; overflow-wrap: anywhere; text-wrap: balance; }
 h3 small { display: block; margin-top: 10px; font: 500 15px/1.4 var(--sans); color: var(--ink-2); }
 .meta { margin: 0; font: 600 14px/1.2 var(--cond); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
 .p-body { display: grid; gap: 14px; align-content: start; min-width: 0; }
@@ -210,6 +210,26 @@ h3 small { display: block; margin-top: 10px; font: 500 15px/1.4 var(--sans); col
 .list .stamp { align-self: start; }
 .list li.has-thumb { grid-template-columns: minmax(0, 1fr) max-content 92px; }
 .list .thumb { grid-column: 3; grid-row: 1 / span 3; width: 92px; height: 120px; max-width: 100%; object-fit: cover; border: 1px solid var(--or-line); filter: grayscale(.35) contrast(1.08); }
+.list li[role="button"] { cursor: pointer; }
+.list li[aria-expanded="true"] { background-color: var(--or-faint); box-shadow: inset 3px 0 0 var(--or); }
+.list li .more { display: none; }
+
+/* ---------- archive side card ---------- */
+.drawer { position: fixed; z-index: 50; top: 0; right: 0; bottom: 0; width: min(440px, 100vw); display: flex; flex-direction: column; background: var(--panel); border-left: 1px solid var(--or); box-shadow: -24px 0 48px rgba(0, 0, 0, .7); }
+.drawer[hidden] { display: none; }
+.drawer .p-bar { margin: 0; flex: none; }
+.drawer-x { font: 700 14px/1 var(--cond); letter-spacing: .16em; color: var(--or); background: none; border: 1px solid var(--or-line); padding: 6px 10px; cursor: pointer; }
+.drawer-x:hover { background: var(--or); color: #000; }
+.drawer-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 22px 22px 32px; display: grid; gap: 14px; align-content: start; }
+.drawer-body h3 { font-size: clamp(30px, 3.4vw, 40px); }
+.drawer-body #drawer-more { display: grid; gap: 12px; font-size: 15px; }
+.drawer-body #drawer-more p { margin: 0; }
+.drawer-body #drawer-more ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; color: var(--ink-2); }
+.drawer-body #drawer-more b { color: var(--paper); }
+@media (prefers-reduced-motion: no-preference) {
+  .drawer:not([hidden]) { animation: slidein .24s steps(4, jump-none) both; }
+  @keyframes slidein { from { transform: translateX(40px); opacity: 0; } }
+}
 
 /* ---------- tools ---------- */
 .xref { margin: 28px 0 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0 28px; }
