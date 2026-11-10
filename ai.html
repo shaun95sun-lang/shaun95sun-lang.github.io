@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="site.css?v=20261110d">
+<link rel="stylesheet" href="site.css?v=20261110e">
 </head>
 <body>
 <div class="wrap">
@@ -26,7 +26,7 @@
 
   <div class="page-head">
     <h1 class="tc"><span class="ep">專案紀錄　AI 共同實作</span><span class="k"><span class="big">協作</span><span>工程</span></span><span class="en">Human × AI pipelines</span></h1>
-    <p class="sec-note">這三套系統是我跟 AI 程式助理（Claude Code）一起做的。我決定要解什麼問題、確認幾何和設計取捨、拍板最後方案；AI 寫程式、在家裡的伺服器上排程跑案例、整理成表格和圖。每一步都寫進只能追加的交接紀錄，算錯的地方留著更正，不會蓋掉。</p>
+    <p class="sec-note">這幾套系統是我跟 AI 程式助理（Claude Code）一起做的。我決定要解什麼問題、確認幾何和設計取捨、拍板最後方案；AI 寫程式、在家裡的伺服器上排程跑案例、整理成表格和圖。每一步都寫進只能追加的交接紀錄，算錯的地方留著更正，不會蓋掉。</p>
   </div>
 
   <!-- ===================== CFD ===================== -->
@@ -140,6 +140,41 @@
     </ol>
   </article>
 
+  <!-- ===================== SolidWorks API ===================== -->
+  <article class="proj fr" id="swapi">
+    <div class="p-bar"><span>SolidWorks API · Scripted CAD</span><span class="stamp s-now">進行中</span></div>
+    <div class="p-head">
+      <h3 class="fit">SolidWorks<br>自動建模<small>參數檔 → 零件、組合件、干涉檢查</small></h3>
+      <p class="meta">機構 · 2026.11</p>
+    </div>
+    <div class="p-body">
+      <p>畫圖最花時間的常常不是設計本身，而是改一個尺寸之後，要重建零件、重組、重做干涉檢查、重新匯出。所以我跟 AI 一起把 SolidWorks 變成可以用程式驅動的工具：尺寸寫在參數檔，腳本透過 SolidWorks API 建零件、組合件、檢查干涉、匯出檔案。<b>改設計＝改一個數字，重跑一次。</b></p>
+      <p><b>擺線減速機。</b>Python 依參數算出齒形和軸向堆疊，產生規格檔；C# 腳本照規格逐個特徵建模，每個特徵都核對體積，再把組合件轉到 36 個角度逐一做干涉檢查，最後自動排盤 3MF、產生 BOM、動畫和 3D 爆炸圖網頁。從 v0.4 改到 v0.7，每版兩種馬達、各 27 個零件，36 個姿態都 0 干涉。</p>
+      <p><b>omni 底盤。</b>全部尺寸集中在一個設計檔。先在電腦裡找現成模型（底板、輪子、馬達、電池盒），找不到才自己建；20 個元件自動組裝，每個元件的位置和理論值比對，誤差 ≤ 0.008 mm，干涉 0。輪子打滑後，也是改參數產生 PETG 芯＋TPU 外皮的滾子。</p>
+      <p><b>感測器融合平台的托架。</b>依每顆感測器模組的尺寸產生 3D 列印托架、模組參考件和組合件。開發板做成可切換（ESP32-S3-CAM ↔ DevKitC-1），板子位置碰到支柱就直接報錯，不會等到印出來才發現。</p>
+      <p class="note">干涉檢查本身也要驗證：每次都做「陽性對照」，故意讓零件重疊一點點（例如把齒輪移 0.1 mm），確認檢查真的抓得到。API 踩過的坑（例如匯出 STL 時輸出的是「作用中的視窗」、組合件放置點是包圍盒中心而不是原點）都寫成慣例文件，下個專案直接沿用。</p>
+      <p class="tools">SolidWorks API · Python (pywin32) · C# · PowerShell · Bambu Studio 3MF</p>
+    </div>
+    <dl class="p-spec">
+      <dt>介面</dt><dd>SolidWorks COM API</dd>
+      <dt>語言</dt><dd>Python · C#</dd>
+      <dt>減速機</dt><dd>v0.4 → v0.7 · 27 零件 × 2 版</dd>
+      <dt>干涉檢查</dt><dd>36 姿態 · 0 干涉 · 陽性對照</dd>
+      <dt>omni 底盤</dt><dd>20 元件 · 位置誤差 ≤ 0.008 mm</dd>
+      <dt>托架</dt><dd>板型可切換 · 自動報錯</dd>
+      <dt>輸出</dt><dd>SLDPRT · STEP · STL · 3MF · BOM</dd>
+    </dl>
+    <ol class="flow" aria-label="SolidWorks 自動建模流程">
+      <li><b>參數檔</b><span>尺寸、配合公差、板型</span></li>
+      <li><b>幾何計算</b><span>Python 算齒形、配置</span></li>
+      <li class="gate"><b>API 建模</b><span>逐特徵建模，核對體積</span></li>
+      <li><b>組合件</b><span>自動放置，核對位置</span></li>
+      <li class="gate"><b>干涉檢查</b><span>多姿態＋陽性對照</span></li>
+      <li><b>輸出</b><span>STEP、STL、3MF、BOM、網頁</span></li>
+      <li class="human"><b>量測與試印</b><span>我用卡尺量實物、印配合試片</span></li>
+    </ol>
+  </article>
+
   <!-- ===================== How the work is split ===================== -->
   <section id="split" aria-labelledby="split-h">
     <h2 class="tc" id="split-h"><span class="ep">附錄</span><span class="k"><span class="big">分工</span><span>方式</span></span><span class="en">How we work</span></h2>
@@ -182,6 +217,6 @@
     <span>2026.11 更新</span>
   </footer>
 </div>
-<script src="site.js?v=20261110d"></script>
+<script src="site.js?v=20261110e"></script>
 </body>
 </html>

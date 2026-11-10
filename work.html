@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="site.css?v=20261110d">
+<link rel="stylesheet" href="site.css?v=20261110e">
 </head>
 <body>
 <div class="wrap">
@@ -26,7 +26,7 @@
 
   <div class="page-head">
     <h1 class="tc"><span class="ep">第貳節</span><span class="k"><span class="big">作品</span><span>紀錄</span></span><span class="en">Project files</span></h1>
-    <p class="sec-note">飛行器的兩架在各自的頁面：<a href="hrist.html">Hrist</a>、<a href="geiravor.html">Geiravör</a>。CFD 自動模擬、自動化建模、語音會議記錄在 <a href="ai.html">AI 共同實作</a>。</p>
+    <p class="sec-note">飛行器的兩架在各自的頁面：<a href="hrist.html">Hrist</a>、<a href="geiravor.html">Geiravör</a>。CFD 自動模擬、自動化建模、SolidWorks 自動建模、語音會議記錄在 <a href="ai.html">AI 共同實作</a>。</p>
   </div>
 
   <article class="proj fr" id="fusion">
@@ -118,7 +118,7 @@
           </li>
           <li id="omni"><b>三輪 omni 底盤</b><span class="stamp s-now">進行中</span><span class="d">BoltNut 社團的全向輪底盤，用 SolidWorks API 腳本建模。</span><span class="t">SOLIDWORKS API · Python · ESP32-S3 · JGA25-370</span>
             <div class="more" hidden>
-              <p>BoltNut 機器人社的三輪全向底盤。這版的特別之處是<b>用 Python 透過 SolidWorks API 建模</b>：所有尺寸集中在一個設計檔，零件由腳本產生，改尺寸就能重建。</p>
+              <p>BoltNut 機器人社的三輪全向底盤。這版的特別之處是<b>用 Python 透過 SolidWorks API 建模</b>：所有尺寸集中在一個設計檔，零件由腳本產生，改尺寸就能重建（<a href="ai.html#swapi">做法</a>）。</p>
               <ul>
                 <li>3 組 omni 輪模組：輪轂、12 顆滾子、JGA25-370 馬達與馬達座</li>
                 <li>每個輪子都裝 AS5600 磁編碼器量轉角，支架和磁鐵座是自己設計的</li>
@@ -215,9 +215,9 @@
               <p class="tools">架構：React/Vite 前端 → Supabase 存帳戶與財務資料；AI 服務走 Node.js 後端 → 本機 Ollama 模型</p>
             </div>
           </li>
-          <li id="ncumap"><b>中央校園與美食地圖</b><span class="stamp s-done">完成</span><span class="d">新生資訊網的校園地圖，負責 UI 繪製與介面設計，改到第 4 版。</span><span class="t">Vue 3 · Python</span>
+          <li id="ncumap"><b>中央校園與美食地圖</b><span class="stamp s-done">完成</span><span class="d">新生資訊網的校園地圖，我負責介面設計，改到第 4 版。</span><span class="t">Vue 3 · Python</span>
             <div class="more" hidden>
-              <p>給新生資訊網用的互動地圖，涵蓋校園、中央路和宵夜街的店家。我負責地圖的 UI 繪製和介面設計，目標是讓剛入學的新生找得到路、找得到吃的。</p>
+              <p>給新生資訊網用的互動地圖，涵蓋校園、中央路和宵夜街的店家。我負責介面設計，目標是讓剛入學的新生找得到路、找得到吃的。</p>
               <ul>
                 <li>從 v1 一路改到 v4</li>
                 <li>另外做了手機版版面</li>
@@ -287,7 +287,7 @@
     <span>2026.11 更新</span>
   </footer>
 </div>
-<script src="site.js?v=20261110d"></script>
-<script src="drawer.js?v=20261110d"></script>
+<script src="site.js?v=20261110e"></script>
+<script src="drawer.js?v=20261110e"></script>
 </body>
 </html>
