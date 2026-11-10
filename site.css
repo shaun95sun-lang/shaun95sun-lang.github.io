@@ -258,12 +258,13 @@ footer { margin-top: 96px; padding-top: 12px; border-top: 1px solid var(--or-lin
 @media (max-width: 960px) {
   .proj { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .p-head { grid-column: 1 / -1; }
+  .figs { grid-template-columns: 1fr; }
   .flow { flex-direction: column; }
   .flow li { margin-right: 0; margin-bottom: 14px; }
   .flow li:not(:last-child)::after { content: "▼"; right: auto; left: 50%; top: auto; bottom: -15px; transform: translateX(-50%); }
 }
 @media (max-width: 720px) {
-  .proj, .groups, .about, .media, .index, .split, .figs { grid-template-columns: 1fr; }
+  .proj, .groups, .about, .media, .index, .split { grid-template-columns: 1fr; }
       .xref { grid-template-columns: 1fr; }
   .log li { grid-template-columns: 56px minmax(0, 1fr); }
   .log span { grid-column: 1 / -1; }
