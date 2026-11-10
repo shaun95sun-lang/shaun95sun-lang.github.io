@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI 共同實作 · Shaun Sun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="mark" href="./">VALKYRIE LAB<span>個人紀錄</span></a>
+    <nav aria-label="頁面導覽">
+      <a href="./">首頁</a>
+      <a href="hrist.html">Hrist</a>
+      <a href="geiravor.html">Geiravör</a>
+      <a href="ai.html" aria-current="page">AI 協作</a>
+      <a href="work.html">作品</a>
+      <a href="about.html">關於</a>
+    </nav>
+  </header>
+
+  <div class="page-head">
+    <h1 class="tc"><span class="ep">專案紀錄　AI 共同實作</span><span class="k"><span class="big">協作</span><span>工程</span></span><span class="en">Human × AI pipelines</span></h1>
+    <p class="sec-note">這三套系統是我跟 AI 程式助理（Claude Code）一起做的。我決定要解什麼問題、確認幾何和設計取捨、拍板最後方案；AI 寫程式、在家裡的伺服器上排程跑案例、整理成表格和圖。每一步都寫進只能追加的交接紀錄，算錯的地方留著更正，不會蓋掉。</p>
+  </div>
+
+  <!-- ===================== CFD ===================== -->
+  <article class="proj fr" id="cfd-auto">
+    <div class="p-bar"><span>CFD pipeline · Batch simulation</span><span class="stamp s-now">進行中</span></div>
+    <div class="p-head">
+      <h3>CFD 自動模擬<small>從 STL 到能飛的模擬器</small></h3>
+      <p class="meta">飛行器 · 2026.10–11</p>
+    </div>
+    <div class="p-body">
+      <p>給 <a href="hrist.html">Hrist</a> 用的。我在 SOLIDWORKS 改完外形匯出 STL，後面的網格、批次 CFD、穩定性分析、產生 JSBSim 氣動表都是腳本自動跑，最後直接進 FlightGear 試飛。一個新構型從匯出到能在模擬器裡起降，大約一個晚上。</p>
+      <p>為了讓每一版能公平比較，訂了兩級評估標準：<b>第一級篩選</b>約 16 個案例（中性點、阻力、滑流、大攻角吹氣、散熱流量），<b>第二級完整</b>約 110 個案例，跑完才重建模擬器。每一項都有及格線，不及格要說清楚是外型問題還是配置問題。</p>
+      <p class="note">10/24 發現俯仰力矩的正負號判讀錯了（OpenFOAM 實際用的 pitchAxis 跟設定檔寫的相反），中性點從 268 mm 更正到 233 mm，原本「可以飛」的重心其實是靜不穩定。這次之後，每個數字都要先對過力和力矩的守恆才採用。</p>
+      <p class="tools">OpenFOAM · snappyHexMesh · simpleFoam k-ω SST · Python · JSBSim · FlightGear · Blender</p>
+    </div>
+    <dl class="p-spec">
+      <dt>主機</dt><dd>lena · Ubuntu 16 核</dd>
+      <dt>求解器</dt><dd>OpenFOAM v2412</dd>
+      <dt>案例格式</dt><dd>名稱:速度:α:β[:推力[:下推角[:旋流]]]</dd>
+      <dt>第一級</dt><dd>~16 案例 · 約 4 小時</dd>
+      <dt>第二級</dt><dd>~110 案例 · 1.5–2 天</dd>
+      <dt>幾何檢查</dt><dd>對齊 · 槳間隙 · 離地 · 起落架 · STL 封閉</dd>
+      <dt>重量掃描</dt><dd>0.5–0.8 kg 配平、起飛、落地</dd>
+    </dl>
+    <ol class="flow" aria-label="CFD 自動模擬流程">
+      <li class="human"><b>CAD 改版</b><span>SOLIDWORKS 匯出 STL</span></li>
+      <li class="gate"><b>幾何檢查</b><span>對齊前版、槳間隙、離地角、水密</span></li>
+      <li><b>網格</b><span>snappyHexMesh，槳盤與滑流區加密</span></li>
+      <li><b>批次 CFD</b><span>攻角 × 速度 × 推力，平行排程</span></li>
+      <li class="gate"><b>後處理</b><span>力與力矩守恆、中性點、舵效</span></li>
+      <li><b>JSBSim</b><span>氣動表、配平、起降腳本</span></li>
+      <li class="human"><b>FlightGear 試飛</b><span>我自己飛，回饋下一版</span></li>
+    </ol>
+    <p class="flow-cap">綠框＝數字要先過檢查才往下走；虛線框＝由我做判斷。</p>
+  </article>
+
+  <!-- ===================== AEDO ===================== -->
+  <article class="proj fr" id="aedo">
+    <div class="p-bar"><span>A.E.D.O. · Automated modeling &amp; structural analysis</span><span class="stamp s-now">進行中</span></div>
+    <div class="p-head">
+      <h3>自動化建模<small>參數化 CAD → 有限元素 → 最佳化</small></h3>
+      <p class="meta">結構 · 2026.11</p>
+    </div>
+    <div class="p-body">
+      <p>A.E.D.O. 是我寫的研究計畫：讓程式自己畫幾何、切網格、跑有限元素分析，再用最佳化演算法改尺寸，整圈不用人點滑鼠。每一次計算的參數、幾何、輸入檔、結果都存起來並算雜湊，任何一個數字都能追回當時的模型。</p>
+      <p><b>先驗證再相信。</b>進最佳化之前必須先過懸臂樑基準：靜力誤差 −0.7%、模態頻率 +0.29%，網格收斂也要做完。用 3 吋機架當練習題：差分演化跑了 480 次評估、成功率 99.4%，在剛性不變的條件下減重 9.7%（載荷和材料是暫定值，只用來驗證流程）。</p>
+      <p><b>延伸到 C7 全機。</b>把 CFD 的表面壓力直接當結構載荷（積分合力和 CFD 的誤差 5×10⁻⁷），做出 joined wing 的樑模型和上翼殼模型。結果發現真正決定結構尺寸的是<b>著陸</b>，不是 4g 飛行：原本 1.0 mm 的直鋼線腳會挫屈，改成 2.5 mm 線圈扭簧腳；材料依列印方向分配 PLA 和 PA6-GF，整機 670.6 g，輸出可以直接插進 SOLIDWORKS 組合件的 STEP。</p>
+      <p class="note">材料許用值是規格書 × 0.4 的暫定值，還沒做試片；外翼 1 圈牆的蒙皮挫屈還要再確認。</p>
+      <p class="tools">build123d · Gmsh · CalculiX · Python · SciPy · pymoo · SQLite</p>
+    </div>
+    <dl class="p-spec">
+      <dt>幾何</dt><dd>build123d 參數化</dd>
+      <dt>網格</dt><dd>Gmsh 二階四面體 C3D10</dd>
+      <dt>求解</dt><dd>CalculiX 靜力 · 模態</dd>
+      <dt>最佳化</dt><dd>LHS DOE · 差分演化</dd>
+      <dt>機架減重</dt><dd>17.63 → 15.92 g（−9.7%）</dd>
+      <dt>C7 整機</dt><dd>670.6 g · 4g 翼尖 0.6 mm</dd>
+      <dt>最吃緊</dt><dd>轉接件 0.91（主輪先著地）</dd>
+    </dl>
+    <ol class="flow" aria-label="自動化建模流程">
+      <li><b>參數化 CAD</b><span>開放變數，幾何 QA</span></li>
+      <li><b>網格</b><span>依幾何選邊界，不靠面編號</span></li>
+      <li><b>CalculiX</b><span>靜力、撞擊、模態</span></li>
+      <li class="gate"><b>檢核</b><span>反力平衡、基準解、網格收斂</span></li>
+      <li><b>紀錄</b><span>參數、STEP、結果、SHA-256 進資料庫</span></li>
+      <li><b>最佳化</b><span>DOE → 差分演化，自動下一輪</span></li>
+      <li class="human"><b>設計決策</b><span>我選方案、定材料與工況</span></li>
+    </ol>
+    <div class="figs">
+    <figure class="wide">
+      <img src="media/frame-de.png" alt="3 吋機架基準設計與最佳化後設計的 von Mises 應力分布比較，上排為推力工況，下排為側面撞擊工況" loading="lazy">
+      <figcaption>左：基準機架 17.63 g；右：差分演化結果 15.92 g（臂根加寬、末端收窄、大圓角、中心開孔）。上排推力工況，下排側面撞擊。</figcaption>
+    </figure>
+    <figure class="wide">
+      <img src="media/c7-structure.png" alt="C7 結構概念三視圖：橘色為 PA6-GF 翼樑、龍骨與馬達臂，藍色為上翼蒙皮，灰色為 PLA Aero 外殼，黑線為彈簧鋼線起落架" loading="lazy">
+      <figcaption>C7 結構概念（暫定）：橘＝PA6-GF 翼樑／龍骨／馬達臂，藍＝上翼蒙皮，黑線＝彈簧鋼線起落架。</figcaption>
+    </figure>
+    </div>
+  </article>
+
+  <!-- ===================== Meeting notes ===================== -->
+  <article class="proj fr" id="meeting">
+    <div class="p-bar"><span>BoltNut · Voice meeting minutes</span><span class="stamp s-now">進行中</span></div>
+    <div class="p-head">
+      <h3>語音會議記錄<small>BoltNut 例會用</small></h3>
+      <p class="meta">社團 · 軟體 · 2026.11</p>
+    </div>
+    <div class="p-body">
+      <p>機器人社開會很吵、很多人搶話，又常中英夾雜。這套系統在本機即時產生逐字稿、分辨說話者，會後套模板整理出決議、待辦和待解問題。手機可以透過 Tailscale 當麥克風，辨識還是在家裡的 GPU 上跑，錄音不離開自己的網路。</p>
+      <p><b>兩個模型互相檢查。</b>TEA-ASR 負責即時逐字稿，Breeze-ASR 在背景重聽同一句，算兩邊的混合錯誤率：低於 15% 算一致，15–50% 標 ⚠ 待確認，超過 50% 標 🔇 聽不清楚。會後再請 lena 上的語言模型對 ⚠ 句做常識判斷，但只能從兩個版本裡挑字，而且只是<b>建議</b>，要人按「採用」才會替換。</p>
+      <p><b>原文永遠不改。</b>逐字稿只追加，複核、建議、人工校對各自存一份紀錄，每一句都能還原。不確定的內容不准寫成決議，兩個版本數字不同就寫「A 或 B（待確認）」。</p>
+      <p class="note">AI 聽不到錄音，所以辨識準確度是用我自己校對過的參考稿來調，不拿模型的猜測當標準答案。下一步要接 <a href="work.html#bnmem">Boltnut-Memory</a>，讓決策可以回查。</p>
+      <p class="tools">Python · FastAPI · sherpa-onnx · TEA-ASR-1.1 · Breeze-ASR-25 · Jinja2 · Tailscale</p>
+    </div>
+    <dl class="p-spec">
+      <dt>即時辨識</dt><dd>TEA-ASR-1.1（Qwen3-ASR 微調）</dd>
+      <dt>複核</dt><dd>Breeze-ASR-25（Whisper 微調）</dd>
+      <dt>說話者</dt><dd>VAD + 聲紋，可記住成員</dd>
+      <dt>延遲</dt><dd>講完約 1–3 s 出字</dd>
+      <dt>GPU</dt><dd>本機 RTX 5060 · 5–6 GB</dd>
+      <dt>整理</dt><dd>lena 上的 LLM · 與 Inori 共用排隊</dd>
+      <dt>音源</dt><dd>現場麥克風 · 線上會議 · 手機</dd>
+    </dl>
+    <ol class="flow" aria-label="語音會議記錄架構">
+      <li><b>音源</b><span>麥克風、遠端會議聲音、手機</span></li>
+      <li><b>VAD + 聲紋</b><span>切句、分辨說話者</span></li>
+      <li><b>TEA-ASR</b><span>即時逐字稿</span></li>
+      <li class="gate"><b>Breeze 複核</b><span>錯誤率分級 ⚠ / 🔇</span></li>
+      <li><b>LLM 整理</b><span>模板產生會議記錄、常識判斷建議</span></li>
+      <li class="human"><b>校對與採用</b><span>人工確認後才算數</span></li>
+    </ol>
+  </article>
+
+  <!-- ===================== How the work is split ===================== -->
+  <section id="split" aria-labelledby="split-h">
+    <h2 class="tc" id="split-h"><span class="ep">附錄</span><span class="k"><span class="big">分工</span><span>方式</span></span><span class="en">How we work</span></h2>
+    <p class="sec-note">AI 寫得很快，但它不知道我的飛機長什麼樣、也不知道社團開會有多吵。所以規則是我訂的。</p>
+    <div class="split">
+      <div class="fr">
+        <h3>我</h3>
+        <ul>
+          <li>定題目和評估標準</li>
+          <li>確認幾何怎麼解讀（例如那是莢艙還是散熱艙道）</li>
+          <li>提供實際重量、材料、使用情境</li>
+          <li>在方案之間做取捨，拍板</li>
+        </ul>
+      </div>
+      <div class="fr">
+        <h3>AI</h3>
+        <ul>
+          <li>寫建模、網格、求解、後處理腳本</li>
+          <li>在 lena 上排程、平行跑案例</li>
+          <li>整理成表格、圖和報告</li>
+          <li>標出哪些是暫定值、哪些不確定</li>
+        </ul>
+      </div>
+      <div class="fr">
+        <h3>規則</h3>
+        <ul>
+          <li>交接紀錄只追加，錯了寫更正，不刪舊結論</li>
+          <li>數字先過守恆、基準或收斂檢查才採用</li>
+          <li>暫定值一律標明，不當設計結論</li>
+          <li>不確定就問我，不自己命名幾何</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <p class="next"><a href="aerofold.html">上一份：AeroFold</a><a href="work.html">下一份：作品</a></p>
+
+  <footer>
+    <span>Valkyrie Lab · Shaun Sun</span>
+    <span>2026.11 更新</span>
+  </footer>
+</div>
+<script src="site.js"></script>
+</body>
+</html>
