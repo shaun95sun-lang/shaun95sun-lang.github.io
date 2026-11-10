@@ -55,8 +55,9 @@
       <dt>鉸鏈軸</dt><dd>(0.579, 0.579, −0.574)，偏離立方體對角線 0.26°</dd>
       <dt>折疊角</dt><dd>120°</dd>
       <dt>梭座行程</dt><dd>277.9 mm，全程單調</dd>
-      <dt>梭座最高速度</dt><dd>208.4 mm/s（ADAMS，2 s 折完）</dd>
-      <dt>ADAMS</dt><dd>0 自由度 · 無冗餘約束 · 終點 120.007°</dd>
+      <dt>運動曲線</dt><dd>機翼轉角 11 次平滑曲線，起停點的加速度、急跳度、snap 都從 0 接上</dd>
+      <dt>梭座最高速度</dt><dd>446 mm/s（ADAMS，2 s 折完）</dd>
+      <dt>ADAMS</dt><dd>0 自由度 · 無冗餘約束 · 終點 120.000°</dd>
     </dl>
     <figure class="viewer fr">
       <div class="panel-h"><span>Fold sim · AeroFold V2</span><span>Closed form</span></div>
@@ -66,11 +67,11 @@
       <figcaption class="note" style="border-top: 1px solid var(--or-line)">拖曳旋轉，滾輪或雙指縮放，按「播放折疊」看整段動作。紅線是鉸鏈軸和梭座到翼上固定點的連線。<a href="aerofold-viewer.html?v=20261109b">全螢幕開啟</a></figcaption>
     </figure>
     <figure class="viewer fr" id="adams">
-      <div class="panel-h"><span>ADAMS · AeroFold V2</span><span>Solver output · 451 steps</span></div>
+      <div class="panel-h"><span>ADAMS · AeroFold V2</span><span>Solver output · smooth profile</span></div>
       <div class="v-stage">
-        <iframe src="aerofold-adams-viewer.html?v=20261109b#theme=dark" title="ADAMS 運動學解驅動的 AeroFold V2 機翼折疊動畫，含翼尖軌跡和時間曲線" loading="lazy" allowfullscreen></iframe>
+        <iframe src="aerofold-adams-viewer.html?v=20261110e#theme=dark" title="ADAMS 運動學解驅動的 AeroFold V2 機翼折疊動畫，含翼尖軌跡和時間曲線" loading="lazy" allowfullscreen></iframe>
       </div>
-      <figcaption class="note" style="border-top: 1px solid var(--or-line)">由 ADAMS 2025.1 的運動學解直接驅動：梭座 2 s 往前拉 277.9 mm，翼折到 120°，停 0.5 s，再 2 s 展開。面板的三張小圖是折疊角、梭座位移和梭座速度，速度是 ADAMS 直接量出來的，最高 208.4 mm/s。紅色弧線是 ADAMS 算出的翼尖軌跡，和上面的公式解差不到 0.005 mm。<a href="aerofold-adams-viewer.html?v=20261109b">全螢幕開啟</a></figcaption>
+      <figcaption class="note" style="border-top: 1px solid var(--or-line)">由 ADAMS 2025.1 的運動學解直接驅動：機翼照 11 次平滑曲線在 2 s 內折到 120°，停 0.5 s，再 2 s 展開，梭座的行程和速度由連桿算出來。原本用 STEP 驅動梭座時，起停點的角加速度會跳變、急跳度出現脈衝；換成這條曲線後都連續，急跳度的斜率也沒有尖點。代價是中段要走得比較快，梭座最高 446 mm/s。面板的小圖是折疊角、角加速度、急跳度、梭座位移和速度。紅色弧線是 ADAMS 算出的翼尖軌跡。<a href="aerofold-adams-viewer.html?v=20261110e">全螢幕開啟</a></figcaption>
     </figure>
   </article>
 
