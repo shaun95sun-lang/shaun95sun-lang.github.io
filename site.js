@@ -18,7 +18,7 @@
     var ctx = cv.getContext('2d'), view = cv.parentNode;
     var input = document.getElementById('aoa-in'), out = document.getElementById('aoa-out'), stateEl = document.getElementById('state');
     var W = 0, H = 0, aoa = 4, target = 4, colors = {};
-    var AMIN = -4, AMAX = 16, STALL = 12, RULER = 46;
+    var AMIN = -4, AMAX = 16, STALL = 12, RULER = 46;   // STALL: angle where the animation starts showing separation (a display setting, not a measured value)
 
     // surface nodes, clockwise: trailing edge -> lower surface -> leading edge -> upper surface -> trailing edge
     var M = 50, NX = [], NY = [];
@@ -255,7 +255,7 @@
       out.textContent = (target < 0 ? '−' : '+') + (s.length < 4 ? '0' + s : s);
       var stall = target > STALL;
       view.classList.toggle('stall', stall);
-      stateEl.textContent = stall ? 'STALL' : 'NORMAL';
+      stateEl.textContent = stall ? 'SEPARATION' : 'ATTACHED';
       stateEl.classList.toggle('bad', stall);
       if (reduce) { aoa = target; drawStatic(); }
     }

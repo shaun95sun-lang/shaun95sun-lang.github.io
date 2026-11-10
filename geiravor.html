@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="site.css?v=20261110e">
+<link rel="stylesheet" href="site.css?v=20261111b">
 </head>
 <body>
 <div class="wrap">
@@ -15,12 +15,10 @@
   <header class="top">
     <a class="mark" href="./">VALKYRIE LAB<span>個人紀錄</span></a>
     <nav aria-label="頁面導覽">
-      <a href="./">首頁</a>
-      <a href="hrist.html">Hrist</a>
-      <a href="geiravor.html" aria-current="page">Geiravör</a>
-      <a href="ai.html">AI 協作</a>
-      <a href="work.html">作品</a>
-      <a href="about.html">關於</a>
+      <a href="./#featured">代表作品</a>
+      <a href="./#devlog">開發紀錄</a>
+      <a href="work.html">全部作品</a>
+      <a href="about.html">關於我</a>
     </nav>
   </header>
 
@@ -29,14 +27,26 @@
   </div>
 
   <article class="proj fr" id="geiravor">
-    <div class="p-bar"><span>Geiravör · Canard delta pusher</span><span class="stamp s-plan">規劃中</span></div>
+    <div class="p-bar"><span>Geiravör · Canard delta pusher</span><span class="stamp s-plan">整機設計中</span></div>
+    <dl class="brief">
+      <div><dt>設計問題</dt><dd>0.9 m 鴨翼三角翼推進式，在低速、高攻角時，控制要怎麼介入？</dd></div>
+      <div><dt>我的工作</dt><dd>整機構型、CAD 與列印檔，研究方向整理到第 4 版。</dd></div>
+      <div><dt>目前成果</dt><dd>整機模型（下方可旋轉）、動力與飛控規劃。</dd></div>
+      <div><dt>證據階段</dt><dd><span class="stage">整機設計中。</span>還沒試飛，也還沒有實測資料。</dd></div>
+    </dl>
     <div class="p-head">
       <h3>Geiravör<small>鴨翼三角翼推進式</small></h3>
       <p class="meta">飛行器 · 2026.10</p>
     </div>
     <div class="p-body">
       <p>0.9 m 的鴨翼三角翼推進式固定翼。想用實機資料研究低速、高攻角時怎麼介入控制。研究方向已經整理成第 4 版。</p>
-      <p class="note">還在規劃。順序是先能飛，再能測、能控，最後才最佳化。</p>
+      <ul class="subs">
+        <li><span>整機模型（列印檔）</span><span class="stamp s-done">已完成</span></li>
+        <li><span>研究方向總整理 v4</span><span class="stamp s-done">已完成</span></li>
+        <li><span>首飛：先能飛</span><span class="stamp s-plan">後續</span></li>
+        <li><span>加量測：能測</span><span class="stamp s-plan">後續</span></li>
+        <li><span>高攻角控制介入：能控</span><span class="stamp s-plan">後續</span></li>
+      </ul>
       <p class="tools">SOLIDWORKS · STEP / 3MF · ArduPilot</p>
     </div>
     <dl class="p-spec">
@@ -66,6 +76,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script src="site.js?v=20261110e"></script>
+<script src="site.js?v=20261111b"></script>
 </body>
 </html>

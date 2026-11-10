@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="site.css?v=20261110e">
+<link rel="stylesheet" href="site.css?v=20261111b">
 </head>
 <body>
 <div class="wrap">
@@ -15,12 +15,10 @@
   <header class="top">
     <a class="mark" href="./">VALKYRIE LAB<span>個人紀錄</span></a>
     <nav aria-label="頁面導覽">
-      <a href="./">首頁</a>
-      <a href="hrist.html">Hrist</a>
-      <a href="geiravor.html">Geiravör</a>
-      <a href="ai.html">AI 協作</a>
-      <a href="work.html" aria-current="page">作品</a>
-      <a href="about.html">關於</a>
+      <a href="./#featured">代表作品</a>
+      <a href="./#devlog">開發紀錄</a>
+      <a href="work.html" aria-current="page">全部作品</a>
+      <a href="about.html">關於我</a>
     </nav>
   </header>
 
@@ -105,11 +103,26 @@
 
   <section id="other" aria-labelledby="other-h">
     <h2 class="tc" id="other-h"><span class="ep">第參節</span><span class="k"><span class="big">其他</span><span>東西</span></span><span class="en">Archive</span></h2>
-    <p class="sec-note">點任一項，右邊會打開小卡，說明它具體在做什麼。</p>
+    <p class="sec-note">依飛行器與機構、嵌入式、軟體與社團、攝影分類。點任一項，右邊會打開小卡。</p>
     <div class="groups">
       <div class="group">
-        <h3>飛行器 · 機構</h3>
+        <h3>飛行器與機構</h3>
         <ul class="list">
+          <li id="x-hrist"><b>Hrist 半環翼</b><span class="stamp s-now">飛行模擬已建立</span><span class="d">半環翼固定翼，CFD 比較構型後選出 C7。</span><span class="t">SOLIDWORKS · OpenFOAM · JSBSim</span>
+            <div class="more" hidden><p>全油門會抬頭，該抬高馬達艙還是改推力方向？比較 C4、C5、C7 的俯仰與阻力後，選出馬達下推 10° 的 C7。</p><p><a href="hrist.html">看 Hrist 專案頁</a></p></div>
+          </li>
+          <li id="x-gei"><b>Geiravör 鴨翼三角翼</b><span class="stamp s-plan">整機設計中</span><span class="d">0.9 m 鴨翼三角翼推進式，研究低速高攻角控制。</span><span class="t">SOLIDWORKS · ArduPilot</span>
+            <div class="more" hidden><p>想用實機資料研究低速、高攻角時怎麼介入控制。整機模型完成，順序是先能飛，再能測、能控。</p><p><a href="geiravor.html">看 Geiravör 專案頁</a></p></div>
+          </li>
+          <li id="x-aerofold"><b>AeroFold 折疊翼</b><span class="stamp s-done">運動學模型已完成</span><span class="d">開源折疊翼 VTOL 的機翼折疊運動學，解析幾何與 ADAMS 比對。</span><span class="t">ADAMS · Python · three.js</span>
+            <div class="more" hidden><p>原機設計 Tim O'Brien。我把 51 個 STL 組回整機，推導斜向鉸鏈讓機翼轉 120° 折回機身的運動學，再用 ADAMS 驗證。</p><p><a href="aerofold.html">看 AeroFold 專案頁</a></p></div>
+          </li>
+          <li id="x-aedo"><b>A.E.D.O. 自動化建模</b><span class="stamp s-now">流程已驗證</span><span class="d">參數化 CAD → 有限元素 → 最佳化，用在機架和 Hrist C7 結構。</span><span class="t">build123d · Gmsh · CalculiX</span>
+            <div class="more" hidden><p>機架在剛性不變下 17.63 → 15.92 g（暫定工況）；C7 結構分析找出著陸是決定尺寸的工況。</p><p><a href="ai.html#aedo">看 A.E.D.O.</a></p></div>
+          </li>
+          <li id="x-swapi"><b>SolidWorks 自動建模</b><span class="stamp s-now">進行中</span><span class="d">改一個參數就重建零件、組合件、干涉檢查和列印檔。</span><span class="t">SolidWorks API · Python · C#</span>
+            <div class="more" hidden><p>用在擺線減速機、omni 底盤和感測器托架。干涉檢查每次都做陽性對照。</p><p><a href="ai.html#swapi">看做法</a></p></div>
+          </li>
           <li id="testbed"><b>1.2 m 級測試機</b><span class="stamp s-plan">規劃中</span><span class="d">專題用的姿態模擬試驗機。</span><span class="t">SOLIDWORKS</span>
             <div class="more" hidden>
               <p>專題用的 1.2 m 級固定翼試驗機，做姿態模擬相關的實驗。</p>
@@ -160,7 +173,7 @@
         </ul>
       </div>
       <div class="group">
-        <h3>社團</h3>
+        <h3>軟體與社團</h3>
         <ul class="list">
           <li id="bnweb"><b>BoltNut 社團網站</b><span class="stamp s-done">完成</span><span class="d">社團官網加一個自己寫的後台，幹部可以直接改內容、換圖。</span><span class="t">Astro · Cloudflare Pages Functions</span>
             <div class="more" hidden>
@@ -196,11 +209,6 @@
               </ul>
             </div>
           </li>
-        </ul>
-      </div>
-      <div class="group">
-        <h3>軟體</h3>
-        <ul class="list">
           <li id="fincoach"><b>FinCoach AI 財務健診</b><span class="stamp s-done">完成</span><span class="d">財務決策 App，我負責前端 UI、系統架構和 AI 整合，做完整個使用流程。</span><span class="t">React · Node.js · Supabase · Ollama · Capacitor</span>
             <div class="more" hidden>
               <p>AI 財務健診平台：使用者填完問卷，就拿到個人化的投資人格報告，再用 AI 諮詢和保單分析了解自己的財務狀況。我負責前端 UI、系統架構和 AI 整合。</p>
@@ -267,6 +275,14 @@
           </li>
         </ul>
       </div>
+      <div class="group">
+        <h3>攝影</h3>
+        <ul class="list">
+          <li id="x-photo"><b>攝影</b><span class="stamp s-done">持續更新</span><span class="d">不做機器的時候會出去拍照。</span><span class="t">Instagram</span>
+            <div class="more" hidden><p>拍到的東西都放在 Instagram。</p><p><a href="https://www.instagram.com/depictlife._.forever/" target="_blank" rel="noopener">@depictlife._.forever</a></p></div>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -287,7 +303,7 @@
     <span>2026.11 更新</span>
   </footer>
 </div>
-<script src="site.js?v=20261110e"></script>
+<script src="site.js?v=20261111b"></script>
 <script src="drawer.js?v=20261110e"></script>
 </body>
 </html>

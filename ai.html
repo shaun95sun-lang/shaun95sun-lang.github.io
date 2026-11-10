@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="site.css?v=20261110e">
+<link rel="stylesheet" href="site.css?v=20261111b">
 </head>
 <body>
 <div class="wrap">
@@ -15,12 +15,10 @@
   <header class="top">
     <a class="mark" href="./">VALKYRIE LAB<span>個人紀錄</span></a>
     <nav aria-label="頁面導覽">
-      <a href="./">首頁</a>
-      <a href="hrist.html">Hrist</a>
-      <a href="geiravor.html">Geiravör</a>
-      <a href="ai.html" aria-current="page">AI 協作</a>
-      <a href="work.html">作品</a>
-      <a href="about.html">關於</a>
+      <a href="./#featured">代表作品</a>
+      <a href="./#devlog">開發紀錄</a>
+      <a href="work.html">全部作品</a>
+      <a href="about.html">關於我</a>
     </nav>
   </header>
 
@@ -37,7 +35,7 @@
       <p class="meta">飛行器 · 2026.10–11</p>
     </div>
     <div class="p-body">
-      <p>給 <a href="hrist.html">Hrist</a> 用的。我在 SOLIDWORKS 改完外形匯出 STL，後面的網格、批次 CFD、穩定性分析、產生 JSBSim 氣動表都是腳本自動跑，最後直接進 FlightGear 試飛。一個新構型從匯出到能在模擬器裡起降，大約一個晚上。</p>
+      <p>給 <a href="hrist.html">Hrist</a> 用的。我在 SOLIDWORKS 改完外形匯出 STL，後面的網格、批次 CFD、穩定性分析、產生 JSBSim 氣動表都是腳本自動跑，最後直接進 FlightGear 試飛。</p>
       <p>為了讓每一版能公平比較，訂了兩級評估標準：<b>第一級篩選</b>約 16 個案例（中性點、阻力、滑流、大攻角吹氣、散熱流量），<b>第二級完整</b>約 110 個案例，跑完才重建模擬器。每一項都有及格線，不及格要說清楚是外型問題還是配置問題。</p>
       <p class="note">10/24 發現俯仰力矩的正負號判讀錯了（OpenFOAM 實際用的 pitchAxis 跟設定檔寫的相反），中性點從 268 mm 更正到 233 mm，原本「可以飛」的重心其實是靜不穩定。這次之後，每個數字都要先對過力和力矩的守恆才採用。</p>
       <p class="tools">OpenFOAM · snappyHexMesh · simpleFoam k-ω SST · Python · JSBSim · FlightGear · Blender</p>
@@ -46,8 +44,8 @@
       <dt>主機</dt><dd>lena · Ubuntu 16 核</dd>
       <dt>求解器</dt><dd>OpenFOAM v2412</dd>
       <dt>案例格式</dt><dd>名稱:速度:α:β[:推力[:下推角[:旋流]]]</dd>
-      <dt>第一級</dt><dd>~16 案例 · 約 4 小時</dd>
-      <dt>第二級</dt><dd>~110 案例 · 1.5–2 天</dd>
+      <dt>第一級</dt><dd>~16 案例 · 約 4 小時（評估標準的預估）</dd>
+      <dt>第二級</dt><dd>~110 案例 · 1.5–2 天（預估）</dd>
       <dt>幾何檢查</dt><dd>對齊 · 槳間隙 · 離地 · 起落架 · STL 封閉</dd>
       <dt>重量掃描</dt><dd>0.5–0.8 kg 配平、起飛、落地</dd>
     </dl>
@@ -65,7 +63,13 @@
 
   <!-- ===================== AEDO ===================== -->
   <article class="proj fr" id="aedo">
-    <div class="p-bar"><span>A.E.D.O. · Automated modeling &amp; structural analysis</span><span class="stamp s-now">進行中</span></div>
+    <div class="p-bar"><span>A.E.D.O. · Automated modeling &amp; structural analysis</span><span class="stamp s-now">流程已驗證</span></div>
+    <dl class="brief">
+      <div><dt>設計問題</dt><dd>每改一次尺寸就要重新建模、切網格、分析。能不能讓程式自己迭代，同時確保算出來的數字可信？</dd></div>
+      <div><dt>我的工作</dt><dd>寫研究計畫；設定驗算基準（懸臂樑解析解）、設計條件、材料和工況，做設計決策。AI 程式助理實作建模、網格、求解與最佳化程式。</dd></div>
+      <div><dt>目前成果</dt><dd>機架在剛性不變下 17.63 → 15.92 g（暫定工況）。延伸到 Hrist C7：結構概念 670.6 g，找出著陸才是決定尺寸的工況。</dd></div>
+      <div><dt>證據階段</dt><dd><span class="stage">流程已驗證。</span>基準誤差 &lt; 1%；材料許用值與載荷是暫定值，還沒做試片。</dd></div>
+    </dl>
     <div class="p-head">
       <h3>自動化<wbr>建模<small>參數化 CAD → 有限元素 → 最佳化</small></h3>
       <p class="meta">結構 · 2026.11</p>
@@ -217,6 +221,6 @@
     <span>2026.11 更新</span>
   </footer>
 </div>
-<script src="site.js?v=20261110e"></script>
+<script src="site.js?v=20261111b"></script>
 </body>
 </html>

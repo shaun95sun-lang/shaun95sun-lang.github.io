@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,700..900&family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Saira+Extra+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="site.css?v=20261110e">
+<link rel="stylesheet" href="site.css?v=20261111b">
 <style>
   .v-stage iframe { display: block; width: 100%; height: clamp(460px, 62vw, 680px); border: 0; background: #000; }
 </style>
@@ -18,12 +18,10 @@
   <header class="top">
     <a class="mark" href="./">VALKYRIE LAB<span>個人紀錄</span></a>
     <nav aria-label="頁面導覽">
-      <a href="./">首頁</a>
-      <a href="hrist.html">Hrist</a>
-      <a href="geiravor.html">Geiravör</a>
-      <a href="ai.html">AI 協作</a>
-      <a href="work.html">作品</a>
-      <a href="about.html">關於</a>
+      <a href="./#featured">代表作品</a>
+      <a href="./#devlog">開發紀錄</a>
+      <a href="work.html">全部作品</a>
+      <a href="about.html">關於我</a>
     </nav>
   </header>
 
@@ -32,7 +30,20 @@
   </div>
 
   <article class="proj fr" id="aerofold">
-    <div class="p-bar"><span>AeroFold V2 · Wing fold · 2026.11</span><span class="stamp s-now">進行中</span></div>
+    <div class="p-bar"><span>AeroFold V2 · Wing fold · 2026.11</span><span class="stamp s-done">運動學模型已完成</span></div>
+    <dl class="brief">
+      <div><dt>設計問題</dt><dd>一條斜向的鉸鏈，要怎麼讓 1.6 m 的機翼轉 120° 折回機身旁、翼面立起來？尾管上的梭座要走多遠？</dd></div>
+      <div><dt>我的工作</dt><dd>把 51 個列印用 STL 組回整機，推導鉸鏈軸和梭座的運動學，在 ADAMS 建模互相驗證，並做成可以操作的 3D 檢視器。原機設計是 Tim O'Brien。</dd></div>
+      <div><dt>目前成果</dt><dd>鉸鏈軸偏離立方體對角線 0.26°；梭座行程 277.9 mm、全程單調；ADAMS 模型 0 自由度，終點 120.000°。</dd></div>
+      <div><dt>證據階段</dt><dd><span class="stage">運動學模型已完成。</span>解析幾何加 ADAMS；還沒做受力分析和實機。</dd></div>
+    </dl>
+    <figure class="viewer fr" id="fold">
+      <div class="panel-h"><span>Fold sim · AeroFold V2</span><span>Closed form</span></div>
+      <div class="v-stage">
+        <iframe src="aerofold-viewer.html?v=20261109b#theme=dark" title="AeroFold V2 組裝與機翼折疊 3D 模擬，可以旋轉、縮放、播放折疊" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <figcaption class="note" style="border-top: 1px solid var(--or-line)">拖曳旋轉，滾輪或雙指縮放，按「播放折疊」看整段動作。紅線是鉸鏈軸和梭座到翼上固定點的連線。<a href="aerofold-viewer.html?v=20261109b">全螢幕開啟</a></figcaption>
+    </figure>
     <div class="p-head">
       <h3>AeroFold<small>1.6 m 折疊翼 VTOL</small></h3>
       <p class="meta">機構分析 · 2026.11</p>
@@ -40,7 +51,7 @@
     <div class="p-body">
       <p>MakerWorld 上開源的 1.6 m 折疊翼 VTOL。先把 51 個列印用 STL 組回整機，再用原設計的空間鉸鏈、尾管上的梭座和翼上的固定點做機翼折疊的運動學分析，最後在 ADAMS 建模互相驗證。</p>
       <p>鉸鏈軸幾乎就是立方體對角線，繞它轉 120° 剛好讓翼展轉向機身後方、翼面立起來。梭座往前走到頂住機身時，翼剛好折完 120°。</p>
-      <p class="note">原始設計：AeroFold V2 Folding VTOL 1.6m（MakerWorld 開源），版權屬原作者。尾管和梭座到翼的連線是我補上的示意，原檔裡沒有。</p>
+      <p class="note">原機設計：Tim O'Brien（MakerWorld：AeroFold V2 Folding VTOL 1.6m，開源），版權屬原作者。模型重建與運動學分析：Shaun Sun。尾管和梭座到翼的連線是我補上的示意，原檔裡沒有。</p>
       <ul class="subs">
         <li><span>整機組裝</span><span class="stamp s-done">完成</span></li>
         <li><span>折疊運動學</span><span class="stamp s-done">完成</span></li>
@@ -56,16 +67,9 @@
       <dt>折疊角</dt><dd>120°</dd>
       <dt>梭座行程</dt><dd>277.9 mm，全程單調</dd>
       <dt>運動曲線</dt><dd>機翼轉角 11 次平滑曲線，起停點的加速度、急跳度、snap 都從 0 接上</dd>
-      <dt>梭座最高速度</dt><dd>446 mm/s（ADAMS，2 s 折完）</dd>
+      <dt>梭座最高速度</dt><dd>446 mm/s（ADAMS 模擬峰值；工況：平滑曲線、2 s 折完）</dd>
       <dt>ADAMS</dt><dd>0 自由度 · 無冗餘約束 · 終點 120.000°</dd>
     </dl>
-    <figure class="viewer fr">
-      <div class="panel-h"><span>Fold sim · AeroFold V2</span><span>Closed form</span></div>
-      <div class="v-stage">
-        <iframe src="aerofold-viewer.html?v=20261109b#theme=dark" title="AeroFold V2 組裝與機翼折疊 3D 模擬，可以旋轉、縮放、播放折疊" loading="lazy" allowfullscreen></iframe>
-      </div>
-      <figcaption class="note" style="border-top: 1px solid var(--or-line)">拖曳旋轉，滾輪或雙指縮放，按「播放折疊」看整段動作。紅線是鉸鏈軸和梭座到翼上固定點的連線。<a href="aerofold-viewer.html?v=20261109b">全螢幕開啟</a></figcaption>
-    </figure>
     <figure class="viewer fr" id="adams">
       <div class="panel-h"><span>ADAMS · AeroFold V2</span><span>Solver output · smooth profile</span></div>
       <div class="v-stage">
@@ -83,6 +87,6 @@
   </footer>
 </div>
 
-<script src="site.js?v=20261110e"></script>
+<script src="site.js?v=20261111b"></script>
 </body>
 </html>
